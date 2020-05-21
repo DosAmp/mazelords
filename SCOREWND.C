@@ -421,7 +421,7 @@ Abstract:
     Handles updating/controlling the score child window
 ======================================================================*/
 
-LONG FAR PASCAL ScoreWndProc(
+LRESULT FAR PASCAL ScoreWndProc(
     HWND hWnd,
     UINT Message,
     WPARAM wParam,

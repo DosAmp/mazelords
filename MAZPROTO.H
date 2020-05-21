@@ -71,7 +71,7 @@ void InsertSubGrid(int SubGridNo,int iXPos, int iYPos);
                         /* Maze.c */
 
 BOOL InSanctuary(PositionType FAR *Pos);
-LONG FAR PASCAL WndProc(HWND hWnd, UINT Message, UINT wParam, LONG lParam);
+LRESULT FAR PASCAL WndProc(HWND hWnd, UINT Message, UINT wParam, LONG lParam);
 int RegisterClasses(void);
 void UnRegisterClasses(void);
 void OneTimeInit(void);
@@ -84,17 +84,17 @@ void StopDemo(void);
 
                         /* MazeDlg.c */
 
-BOOL FAR PASCAL DroneDlg(HWND hWndDlg, UINT Message, UINT wParam, LONG lParam);
-BOOL FAR PASCAL AboutDlg(HWND hWndDlg, UINT Message, UINT wParam, LONG lParam);
-BOOL FAR PASCAL IntoneDlg(HWND hWndDlg, UINT Message, UINT wParam, LONG lParam);
-BOOL FAR PASCAL PlayerDlg(HWND hWndDlg,UINT Message,WPARAM wParam,LPARAM lParam);
+BOOL FAR PASCAL DroneDlg(HWND hWndDlg, UINT Message, WPARAM wParam, LPARAM lParam);
+BOOL FAR PASCAL AboutDlg(HWND hWndDlg, UINT Message, WPARAM wParam, LPARAM lParam);
+BOOL FAR PASCAL IntoneDlg(HWND hWndDlg, UINT Message, WPARAM wParam, LPARAM lParam);
+BOOL FAR PASCAL PlayerDlg(HWND hWndDlg, UINT Message, WPARAM wParam, LPARAM lParam);
 void cwCenter(HWND hWnd,int top);
 
 
                         /* MazeWnd.c */
 
 void KillSelf(void);
-LONG FAR PASCAL MazeWndProc(HWND hWnd, UINT Message, UINT wParam, LONG lParam);
+LRESULT FAR PASCAL MazeWndProc(HWND hWnd, UINT Message, UINT wParam, LONG lParam);
 void StretchBitmaps(void);
 
                         /* Network.c */
@@ -112,17 +112,17 @@ int ReadSubGrids(VOID);
 
                         /* ScoreWnd.c */
 
-LONG FAR PASCAL ScoreWndProc(HWND hWnd, UINT Message, UINT wParam, LONG lParam);
+LRESULT FAR PASCAL ScoreWndProc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam);
 
 
                         /* TextWnd.c */
 
-LONG FAR PASCAL TextWndProc(HWND hWnd, UINT Message, UINT wParam, LONG lParam);
+LRESULT PASCAL TextWndProc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam);
 void PrintTextLine(LPSTR cLine);
 LPSTR lstrdup(LPSTR s);
                         /* TopWnd.c */
 
-LONG FAR PASCAL TopViewWndProc(HWND hWnd, UINT Message, UINT wParam, LONG lParam);
+LRESULT PASCAL TopViewWndProc(HWND hWnd, UINT Message, WPARAM wParam, LPARAM lParam);
 
 
 #endif

@@ -187,7 +187,7 @@ int PASCAL WinMain(
         }
 
     UnRegisterClasses();
-    return msg.wParam;
+    return (int) msg.wParam;
 }
 
 
@@ -204,7 +204,7 @@ Abstract:
     command messages, and most of the none-movement keystrokes.
 ======================================================================*/
 
-LONG FAR PASCAL WndProc(
+LPARAM PASCAL WndProc(
     HWND hWnd,
     UINT Message,
     WPARAM wParam,
@@ -253,7 +253,7 @@ LONG FAR PASCAL WndProc(
 
                 case IDM_F_HIGHSCORES:
                     bDemoEnable = FALSE;
-                    MessageBox((HWND)NULL,"High Scores aren't implemented.","High Scores",
+                    MessageBox(hWnd,"High Scores aren't implemented.","High Scores",
                                MB_ICONHAND | MB_APPLMODAL);
                     bDemoEnable = TRUE;
                     break;
@@ -331,7 +331,7 @@ LONG FAR PASCAL WndProc(
                     // Create the top-view window
                     //
                     hWndTopView = CreateWindow((LPSTR) "TopViewWindow",
-                                               NULL,
+                                               "",
                                                WS_CHILD | WS_DLGFRAME,
                                                rTopView.left,rTopView.top,
                                                rTopView.right - rTopView.left,
@@ -343,7 +343,7 @@ LONG FAR PASCAL WndProc(
 
                     if(hWndTopView == (HWND)NULL) {
                         LoadString(hInst, IDS_ERR_CREATE_WINDOW, szString, sizeof(szString));
-                        MessageBox((HWND)NULL, szString, "Main", MB_ICONEXCLAMATION);
+                        MessageBox(hWnd, szString, "Main", MB_ICONEXCLAMATION);
                         return IDS_ERR_CREATE_WINDOW;
                         }
 
@@ -354,7 +354,7 @@ LONG FAR PASCAL WndProc(
                     // Create the Text window
                     //
                     hWndText = CreateWindow((LPSTR) "TextWindow",
-                                            NULL,
+                                            "",
                                             WS_CHILD | WS_DLGFRAME,
                                             rText.left,rText.top,
                                             rText.right - rText.left,
@@ -366,7 +366,7 @@ LONG FAR PASCAL WndProc(
 
                     if(hWndText == (HWND)NULL) {
                         LoadString(hInst, IDS_ERR_CREATE_WINDOW, szString, sizeof(szString));
-                        MessageBox((HWND)NULL, szString, "Main", MB_ICONEXCLAMATION);
+                        MessageBox(hWnd, szString, "Main", MB_ICONEXCLAMATION);
                         return IDS_ERR_CREATE_WINDOW;
                         }
 
@@ -392,7 +392,7 @@ LONG FAR PASCAL WndProc(
 
                     if(hWndScore == (HWND)NULL) {
                         LoadString(hInst, IDS_ERR_CREATE_WINDOW, szString, sizeof(szString));
-                        MessageBox((HWND)NULL, szString, "Main", MB_ICONEXCLAMATION);
+                        MessageBox(hWnd, szString, "Main", MB_ICONEXCLAMATION);
                         return IDS_ERR_CREATE_WINDOW;
                         }
 
@@ -485,13 +485,13 @@ LONG FAR PASCAL WndProc(
 
                 case IDM_O_PLAYERSET:
                     bDemoEnable = FALSE;
-                    nRc = DialogBox(hInst,"PLAY_CONF_DLG",hWnd,PlayerDlg);
+                    nRc = (int) DialogBox(hInst,"PLAY_CONF_DLG",hWnd,PlayerDlg);
                     bDemoEnable = TRUE;
                     break;
 
                 case IDM_O_DRONES:
                     bDemoEnable = FALSE;
-                    nRc = DialogBox(hInst,"DRONE_DLG", hWnd, DroneDlg);
+                    nRc = (int) DialogBox(hInst,"DRONE_DLG", hWnd, DroneDlg);
                     if (GameStarted) {
                         if (uiTimer != (UINT) NULL) {
                             KillTimer((HWND)NULL,uiTimer);
@@ -499,7 +499,7 @@ LONG FAR PASCAL WndProc(
 
                         if ((iNumDrones)&&(iDroneSpeed != 0)) {
                             if (! (uiTimer = SetTimer((HWND)NULL,0,ONE_SECOND/iDroneSpeed,MoveDrone))) {
-                                MessageBox((HWND)NULL,"Unable to create timer. Killing Game.","FATAL ERROR",
+                                MessageBox(hWnd,"Unable to create timer. Killing Game.","FATAL ERROR",
                                            MB_ICONEXCLAMATION|MB_APPLMODAL);
                                 SendMessage(hWndMain,WM_CLOSE,0,0);
                                 }
@@ -516,7 +516,7 @@ LONG FAR PASCAL WndProc(
 
                 case IDM_F_STOP:
                     if (GameStarted) {
-                        nRc = MessageBox((HWND)NULL,"Do you really want to stop the game?",
+                        nRc = MessageBox(hWnd,"Do you really want to stop the game?",
                                          "Stop Game",MB_YESNO);
                         //
                         // If they really want to stop the game, do it...
@@ -588,7 +588,7 @@ LONG FAR PASCAL WndProc(
             //
             // Set timer for 30-second intervals to go into demo-mode.
             //
-            SetTimer(hWnd,(UINT) NULL, (UINT) (30*1000),(TIMERPROC) NULL);
+            SetTimer(hWnd, 0, (UINT) (30*1000), NULL);
             //
             // We decide on the basis of user interaction whether to
             // start demo-mode or not.
@@ -908,7 +908,7 @@ void EachTimeInit(
     EnableMenuItem(hMenu,IDM_F_NEWGAME,MF_GRAYED);
     EnableMenuItem(hMenu,IDM_F_STOP,MF_ENABLED);
     EnableMenuItem(hMenu,IDM_O_PAUSE,MF_ENABLED);
-    uiTimer = (UINT) NULL;
+    uiTimer = NULL;
     ptDrones.next = NULL;
     fptPic.next = NULL;
     bSelfInSanct = TRUE;

@@ -1261,5 +1261,5 @@ void DrawPlayers(
             }
         }
 
-    PostMessage(hWndMaze,WM_COMMAND,IDM_REDRAW,(DWORD) rHld);
+    PostMessage(hWndMaze,WM_COMMAND,IDM_REDRAW,rHld);
 }

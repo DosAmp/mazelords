@@ -111,7 +111,7 @@ BOOL FAR PASCAL DroneDlg(
                     iNumDrones = GetDlgItemInt(hWndDlg,DLG_NUMDRONES,&bRet,TRUE);
                     iDroneSpeed = GetDlgItemInt(hWndDlg,DLG_MOVESPEED,&bRet,TRUE);
                     if ((iOldNumDrones != iNumDrones)&&GameStarted) {
-                        PostMessage(hWndMaze,WM_COMMAND,IDM_REDRAW,(DWORD)NULL);
+                        PostMessage(hWndMaze,WM_COMMAND,IDM_REDRAW,NULL);
                         }
 
                     EndDialog(hWndDlg, TRUE);
@@ -435,7 +435,8 @@ BOOL FAR PASCAL PlayerDlg(
                     break;
                 }
 //BUGBUG -- shouldn't it be hWindow,hDC???
-            ReleaseDC(diInfo->hDC,hDC);
+// -- yeah, I think so.
+            ReleaseDC(hWndDlg,hDC);
             break;
 
         case WM_CLOSE:

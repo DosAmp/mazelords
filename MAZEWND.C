@@ -244,7 +244,7 @@ void KillSelf(void)
                MB_ICONEXCLAMATION|MB_APPLMODAL);
         }
     if (bBitmapDraw) {
-        PostMessage(hWndMaze,WM_COMMAND,IDM_REDRAW,(DWORD)NULL);
+        PostMessage(hWndMaze,WM_COMMAND,IDM_REDRAW,NULL);
         }
     else {
         InvalidateRect(hWndMaze,&rMaze,TRUE);
@@ -276,7 +276,7 @@ Abstract:
     perspective window. It has the corresponding controls.
 ======================================================================*/
 
-LONG FAR PASCAL MazeWndProc(
+LRESULT FAR PASCAL MazeWndProc(
     HWND hWnd,
     UINT Message,
     WPARAM wParam,
@@ -297,7 +297,7 @@ LONG FAR PASCAL MazeWndProc(
     switch (Message) {
 
         case WM_CREATE:
-            if (uiTimer != (UINT) NULL) {
+            if (uiTimer) {
                 KillTimer((HWND)NULL,uiTimer);
                 }
 
@@ -461,7 +461,7 @@ LONG FAR PASCAL MazeWndProc(
                                             hMem = GlobalAlloc(GHND,sizeof(RECT));
                                             rPtr = (LPRECT)GlobalLock(hMem);
                                             *rPtr = ptTrav->rDrawn;
-                                            PostMessage(hWndMaze,WM_COMMAND,IDM_REDRAW,(DWORD)rPtr);
+                                            PostMessage(hWndMaze,WM_COMMAND,IDM_REDRAW,(WPARAM) rPtr);
                                             }
                                         ptSelf.iScore += iDronesKilled*iDroneSpeed*iDroneSpeed*iNumDrones/20;
                                         SendNetMessage(0,0,NULL,NP_SCORE);

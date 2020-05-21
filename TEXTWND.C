@@ -182,7 +182,7 @@ Abstract:
 ======================================================================*/
 
 
-LONG FAR PASCAL TextWndProc(
+LRESULT FAR PASCAL TextWndProc(
     HWND hWnd,
     UINT Message,
     WPARAM wParam,

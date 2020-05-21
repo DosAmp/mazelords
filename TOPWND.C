@@ -41,11 +41,11 @@ Abstract:
     Takes care of maintaining the top view map.
 ======================================================================*/
 
-LONG FAR PASCAL TopViewWndProc(
+LRESULT FAR PASCAL TopViewWndProc(
     HWND hWnd,
     UINT Message,
-    UINT wParam,
-    LONG lParam
+    WPARAM wParam,
+    LPARAM lParam
     )
 {
     PAINTSTRUCT ps;

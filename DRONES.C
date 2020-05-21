@@ -329,7 +329,7 @@ LRESULT CALLBACK MoveDrone(
     hMem = GlobalAlloc(GHND,sizeof(RECT));
     rUpd = (LPRECT) GlobalLock(hMem);
     if (rUpd == NULL) {
-        MessageBox((HWND)NULL,"Unable to allocate rectangle. Exiting.","MoveDrone",
+        MessageBox(hWnd,"Unable to allocate rectangle. Exiting.","MoveDrone",
                MB_APPLMODAL);
         PostMessage(hWndMain,WM_CLOSE,0,0);
         }
@@ -416,7 +416,7 @@ LRESULT CALLBACK MoveDrone(
             }
         }
 
-    PostMessage(hWndMaze,WM_COMMAND,IDM_DRAWDRONES,(DWORD) rUpd);
+    PostMessage(hWndMaze,WM_COMMAND,IDM_DRAWDRONES,(WPARAM) rUpd);
 
     return(0);
 }
